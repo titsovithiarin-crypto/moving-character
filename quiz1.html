@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game</title>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script> -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.css" integrity="sha512-x9WwyMYBnlXMNQ6kQ/Lyzu1NqIhLQKL5Oq6xByfXuRj7s9CskyCbLv/1IjqzJmXwFXWr0ov6jBV7Qbc0hh9nHg==" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <style>
+        *{
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+        body{
+            background-image: url("https://www.angrybirds.com/wp-content/uploads/2024/10/AB_Toons-1024x730.jpg");
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            
+        }
+        .main-box{
+            width: 700px;
+            height: 700px;
+            border: 1px solid black;
+            position: relative;
+            background-image: url("https://www.angrybirds.com/wp-content/uploads/2024/07/AB2_background_Anniversary.png");
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            
+        }
+        #little-box{
+            width: 50px;
+            height: 50px;
+            border: 1px solid black;
+            position: absolute;
+            left: 325px;
+            top: 325px;
+        }
+        .group{
+            width: 200px;
+            height: 180px;
+            /* background-color: aqua; */
+        }
+        #btn1{
+            left: 2px;
+            top: 70px;
+        }
+        #btn2{
+            top: 7px;
+            left: 81px;
+        }
+        #btn4{
+            bottom: 10px;
+            left: 82px;
+        }
+        #btn3{
+            right: 2px;
+            top: 70px;
+        }
+        #btn_reset{
+            top: 70px;
+            left: 80px;
+        }
+        img{
+            width: 100%;
+        }
+    </style> 
+</head>
+<body>
+    <div class="main-box mx-auto mt-3 mb-3" style="border-radius: 30px; border: none;">
+        <div id="little-box" class="bg-primary" style="overflow: hidden; border-radius: 100px;"> 
+            <img  id="img" src="https://www.clipartkey.com/mpngs/m/4-45664_thumb-image-angry-birds-icon-png.png" alt="">
+        </div>
+    </div>
+    
+    <div class="group container mb-5 mt-2 position-relative border-2 rounded-5">
+        <button id="btn1" class=" btn btn-success position-absolute "><i class="fa-solid fa-circle-arrow-left"></i></button>
+        <button id="btn2" class=" btn btn-success position-absolute "><i class="fa-solid fa-circle-arrow-up"></i></button>
+        <button id="btn_reset" class=" btn btn-secondary position-absolute"><i class="fa-solid fa-arrow-rotate-left"></i></button>
+        <button id="btn3" class=" btn btn-success position-absolute "><i class="fa-solid fa-circle-arrow-right"></i></button>
+        <button id="btn4" class=" btn btn-success position-absolute "><i class="fa-solid fa-circle-arrow-down"></i></button>
+    </div>
+
+    <script>
+        const btn_left = document.getElementById("btn1");
+        const btn_up = document.getElementById("btn2");
+        const btn_right = document.getElementById("btn3");
+        const btn_down = document.getElementById("btn4");
+        const btn_reset = document.getElementById("btn_reset");
+
+        const img = document.getElementById("img");
+
+        const little_box = document.getElementById("little-box");
+        
+        let x = 325;
+        let y = 325;
+        const forward = 50;
+
+        function moving(){
+            if (x < 0) x = 0;
+            if (y < 0) y = 0;
+            if (x > 630) x = 630;
+            if (y > 630) y = 630;
+
+            little_box.style.top = y  + "px";
+            little_box.style.left = x  + "px";
+        } 
+       
+        btn_left.addEventListener("click" , ()=>{
+            x -= forward; 
+            moving();
+        });
+        btn_up.addEventListener("click", ()=> {
+            y -= forward;
+            moving();
+        })
+        btn_right.addEventListener("click", () =>{
+            x += forward;
+            moving();
+        })
+        btn_down.addEventListener("click", () =>{
+            y += forward;
+            moving();
+        })
+        btn_reset.addEventListener("click", () =>{
+            x = 325;
+            y = 325;
+            moving(); 
+        })
+        img.addEventListener("dblclick", () => {
+            if(img.src.includes("https://www.clipartkey.com/mpngs/m/4-45664_thumb-image-angry-birds-icon-png.png")){
+                img.src = "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/7b174270-82f8-43ed-9fb5-458efff54cc3/dhfmest-10e3f4f9-a0eb-4ea8-a136-b6101f2f02be.png/v1/fill/w_1280,h_1224/chuck_22_by_angrybirdsking_dhfmest-fullview.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MTIyNCIsInBhdGgiOiJcL2ZcLzdiMTc0MjcwLTgyZjgtNDNlZC05ZmI1LTQ1OGVmZmY1NGNjM1wvZGhmbWVzdC0xMGUzZjRmOS1hMGViLTRlYTgtYTEzNi1iNjEwMWYyZjAyYmUucG5nIiwid2lkdGgiOiI8PTEyODAifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6aW1hZ2Uub3BlcmF0aW9ucyJdfQ.fOWTFTvO6Lzd9ba01eCXQpGJx1QMKeAaNevXzx968lM"
+            }else{
+                img.src = "https://www.clipartkey.com/mpngs/m/4-45664_thumb-image-angry-birds-icon-png.png";
+            }
+        })
+
+    </script>
+</body>
+</html>
